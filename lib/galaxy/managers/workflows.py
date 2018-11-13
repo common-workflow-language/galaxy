@@ -345,10 +345,14 @@ class WorkflowContentsManager(UsesAnnotations):
         # Put parameters in workflow mode
         trans.workflow_building_mode = workflow_building_modes.ENABLED
         # If there's a source, put it in the workflow name.
+        if 'name' not in data:
+            raise Exception("Invalid workflow format detected [%s]" % data)
+
+        workflow_input_name = data['name']
         if source:
-            name = "{} (imported from {})".format(data['name'], source)
+            name = "{} (imported from {})".format(workflow_input_name, source)
         else:
-            name = data['name']
+            name = workflow_input_name
         workflow, missing_tool_tups = self._workflow_from_raw_description(
             trans,
             raw_workflow_description,
