@@ -1268,8 +1268,7 @@ class WorkflowContentsManager(UsesAnnotations):
         representing type-specific functionality from the incoming dictionary.
         """
         step = model.WorkflowStep()
-        # TODO: Consider handling position inside module.
-        step.position = step_dict['position']
+        step.position = step_dict.get('position', model.WorkflowStep.DEFAULT_POSITION)
         if step_dict.get("uuid", None) and step_dict['uuid'] != "None":
             step.uuid = step_dict["uuid"]
         if "label" in step_dict:
