@@ -138,6 +138,9 @@ update-dependencies:  build-dependencies-docker ## update linting + dev dependen
 update-and-commit-dependencies: build-dependencies-docker ## update and commit linting + dev dependencies
 	sh lib/galaxy/dependencies/pipfiles/update.sh -d -c
 
+update-cwl-conformance-tests:
+	./test/unit/tools/cwl_tools/update_versions.sh
+
 node-deps: ## Install NodeJS dependencies.
 ifndef YARN
 	@echo "Could not find yarn, which is required to build the Galaxy client.\nTo install yarn, please visit \033[0;34mhttps://yarnpkg.com/en/docs/install\033[0m for instructions, and package information for all platforms.\n"
