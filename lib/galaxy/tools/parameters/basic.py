@@ -2478,14 +2478,14 @@ class FieldTypeToolParameter(ToolParameter):
             return {"src": src, "value": value}
 
     def value_to_basic(self, value, app, use_security=False):
-        log.info("value_to_basic of %s (%s)" % (value, type(value)))
+        log.info("value_to_basic of {} ({})".format(value, type(value)))
         if is_runtime_value(value):
             return runtime_to_json(value)
 
         if value is None:
             return None
 
-        assert isinstance(value, dict), "value [%s] is not valid for [%s]" % (value, self)
+        assert isinstance(value, dict), f"value [{value}] is not valid for [{self}]"
         assert "src" in value
         src = value["src"]
         if src in ["hda", "hdca", "dce"]:
@@ -2495,7 +2495,7 @@ class FieldTypeToolParameter(ToolParameter):
         return json.dumps(value)
 
     def value_from_basic(self, value, app, ignore_errors=False):
-        return super(FieldTypeToolParameter, self).value_from_basic(value, app, ignore_errors)
+        return super().value_from_basic(value, app, ignore_errors)
         # return json.loads(value)
 
 

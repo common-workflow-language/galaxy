@@ -126,7 +126,7 @@ class WrappedParameters:
                         tool=tool,
                         name=input.name)
                 else:
-                    assert False, "Unknown src encountered [%s] for field type value [%s]" % (src, value)
+                    assert False, f"Unknown src encountered [{src}] for field type value [{value}]"
             else:
                 input_values[input.name] = InputValueWrapper(input, value, incoming)
 

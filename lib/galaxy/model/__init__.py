@@ -5257,7 +5257,7 @@ class WorkflowStepConnection(RepresentById):
         return copied_connection
 
     def log_str(self):
-        return "WorkflowStepConnection[output_step_id=%s,output_name=%s,input_step_id=%s,input_name=%s]" % (
+        return "WorkflowStepConnection[output_step_id={},output_name={},input_step_id={},input_name={}]".format(
             self.output_step_id, self.output_name, self.input_step_id, self.input_name
         )
 

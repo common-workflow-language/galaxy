@@ -2718,7 +2718,7 @@ class CwlCommandBindingTool(Tool):
     """Tools that use CWL to bind parameters to command-line descriptions."""
 
     def exec_before_job(self, app, inp_data, out_data, param_dict=None):
-        super(CwlCommandBindingTool, self).exec_before_job(app, inp_data, out_data, param_dict=param_dict)
+        super().exec_before_job(app, inp_data, out_data, param_dict=param_dict)
         # Working directory on Galaxy server (instead of remote compute).
         local_working_directory = param_dict["__local_working_directory__"]
         log.info("exec_before_job for CWL tool")
@@ -2823,7 +2823,7 @@ class CwlCommandBindingTool(Tool):
         log.info("CwlTool.exec_before_job() generated command_line %s" % command_line)
 
     def parse(self, tool_source, **kwds):
-        super(CwlCommandBindingTool, self).parse(tool_source, **kwds)
+        super().parse(tool_source, **kwds)
         cwl_tool_proxy = getattr(tool_source, 'tool_proxy', None)
         if cwl_tool_proxy is None:
             raise Exception("parse() called on tool source not defining a proxy object to underlying CWL tool.")
@@ -2966,7 +2966,7 @@ class DatabaseOperationTool(Tool):
 
             if self.require_dataset_ok:
                 if state != model.Dataset.states.OK:
-                    raise ValueError("Tool requires inputs to be in valid state, but dataset {} is in state '{}'".format(input_dataset, input_dataset.state))
+                    raise ValueError(f"Tool requires inputs to be in valid state, but dataset {input_dataset} is in state '{input_dataset.state}'")
 
         for input_dataset in input_datasets.values():
             check_dataset_state(input_dataset.state)

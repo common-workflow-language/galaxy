@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from __future__ import absolute_import, print_function
 
 import argparse
 import json
@@ -38,7 +37,7 @@ def main(argv=None):
     arg_parser.add_argument("--host", default="http://localhost:8080/")
     arg_parser.add_argument("--outdir", default=".")
     arg_parser.add_argument("--quiet", action="store_true")
-    arg_parser.add_argument("--version", action='version', version='%(prog)s {}~CWL'.format(VERSION))
+    arg_parser.add_argument("--version", action='version', version=f'%(prog)s {VERSION}~CWL')
     arg_parser.add_argument("--cwd", default=os.getcwd())
     arg_parser.add_argument('tool', metavar='TOOL', help='tool or workflow')
     arg_parser.add_argument('job', metavar='JOB', help='job')

@@ -284,7 +284,7 @@ class CwlWorkflowRun(CwlRun):
         self.invocation_id = invocation_id
 
     def _output_name_to_object(self, output_name):
-        invocation_response = self.dataset_populator._get("workflows/%s/invocations/%s" % (self.invocation_id, self.workflow_id))
+        invocation_response = self.dataset_populator._get(f"workflows/{self.invocation_id}/invocations/{self.workflow_id}")
         api_asserts.assert_status_code_is(invocation_response, 200)
         invocation = invocation_response.json()
         return invocation_to_output(invocation, self.history_id, output_name)
@@ -297,7 +297,7 @@ class CwlWorkflowRun(CwlRun):
 
 def load_conformance_tests(directory, path="conformance_tests.yaml"):
     conformance_tests_path = os.path.join(directory, path)
-    with open(conformance_tests_path, "r") as f:
+    with open(conformance_tests_path) as f:
         conformance_tests = yaml.safe_load(f)
 
     expanded_conformance_tests = []
@@ -313,7 +313,7 @@ def load_conformance_tests(directory, path="conformance_tests.yaml"):
     return expanded_conformance_tests
 
 
-class CwlPopulator(object):
+class CwlPopulator:
 
     def __init__(self, dataset_populator, workflow_populator):
         self.dataset_populator = dataset_populator
@@ -326,7 +326,7 @@ class CwlPopulator(object):
             test_data_directory = os.path.dirname(json_path)
         if json_path is not None:
             assert job is None
-            with open(json_path, "r") as f:
+            with open(json_path) as f:
                 if json_path.endswith(".yml") or json_path.endswith(".yaml"):
                     job_as_dict = yaml.safe_load(f)
                 else:
@@ -364,7 +364,7 @@ class CwlPopulator(object):
                     if LOAD_TOOLS_FROM_PATH:
                         dynamic_tool = self.dataset_populator.create_tool_from_path(tool_id)
                     else:
-                        with open(tool_id, "r") as f:
+                        with open(tool_id) as f:
                             representation = yaml.safe_load(f)
                         if "id" not in representation:
                             # TODO: following line doesn't work.

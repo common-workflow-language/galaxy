@@ -16,7 +16,6 @@ from galaxy.webapps.base.controller import BaseAPIController
 from galaxy.webapps.base.controller import UsesVisualizationMixin
 from ._fetch_util import validate_and_normalize_targets
 
-
 log = logging.getLogger(__name__)
 
 # Do not allow these tools to be called directly - they (it) enforces extra security and
@@ -509,7 +508,6 @@ class ToolsController(BaseAPIController, UsesVisualizationMixin):
             raise exceptions.RequestParameterMissingException("Must specify either a tool_id or a tool_uuid.")
 
         tool = trans.app.toolbox.get_tool(**get_kwds)
-        log.info("found tool [%s] with kwds [%s]" % (tool, get_kwds))
         if not tool or not tool.allow_user_access(trans.user):
             raise exceptions.MessageException('Tool not found or not accessible.')
         if trans.app.config.user_activation_on:

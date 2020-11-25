@@ -947,7 +947,6 @@ class InputParameterModule(WorkflowModule):
                     restrict_how_value = "staticSuggestions"
                 else:
                     restrict_how_value = "none"
-                log.info(f"parameter_def [{parameter_def}], how [{restrict_how_value}]")
                 restrict_how_source["options"] = [
                     {"value": "none", "label": "Do not specify restrictions (default).", "selected": restrict_how_value == "none"},
                     {"value": "onConnections", "label": "Attempt restriction based on connections.", "selected": restrict_how_value == "onConnections"},
@@ -1712,7 +1711,7 @@ class ToolModule(WorkflowModule):
 
                 hda_references.append(value)
                 if value.ext == "expression.json":
-                    with open(value.file_name, "r") as f:
+                    with open(value.file_name) as f:
                         # OUR safe_loads won't work, will not load numbers, etc...
                         return json.load(f)
                 else:
@@ -1849,7 +1848,7 @@ class ToolModule(WorkflowModule):
                         if not replacement.is_ok:
                             raise CancelWorkflowEvaluation()
 
-                    with open(replacement.file_name, "r") as f:
+                    with open(replacement.file_name) as f:
                         replacement = safe_loads(f.read())
 
                 if isinstance(input, FieldTypeToolParameter):
@@ -1860,7 +1859,6 @@ class ToolModule(WorkflowModule):
                     elif replacement is not NO_REPLACEMENT:
                         replacement = {"src": "json", "value": replacement}
 
-                log.info("replacement for [%s] is [%s]" % (prefixed_name, replacement))
                 return replacement
 
             try:
@@ -2119,7 +2117,7 @@ def load_module_sections(trans):
     return module_sections
 
 
-class EphemeralCollection(object):
+class EphemeralCollection:
     """Interface for collecting datasets together in workflows and treating as collections.
 
     These aren't real collections in the database - just datasets groupped together

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from __future__ import absolute_import, print_function
 
 import argparse
 import os
@@ -39,12 +38,12 @@ def main(argv=None):
 
     os.environ['GALAXY_TEST_HOST'] = args.host
     os.environ['GALAXY_TEST_PORT'] = args.port
-    os.environ['GALAXY_TEST_EXTERNAL'] = 'http://{}:{}'.format(args.host, args.port)
+    os.environ['GALAXY_TEST_EXTERNAL'] = f'http://{args.host}:{args.port}'
     os.environ['GALAXY_CONFIG_MASTER_API_KEY'] = args.api_key
     os.environ['GALAXY_TEST_USER_API_KEY'] = args.api_key
     os.environ['CWL_TOOL_DIRECTORY'] = cwl_tool_directory
 
-    test_runner_script = '{}/run_tests.sh'.format(ROOT_DIRECTORY)
+    test_runner_script = f'{ROOT_DIRECTORY}/run_tests.sh'
     cmd = [test_runner_script, '-api', test_path]
     subprocess.call(cmd)
 

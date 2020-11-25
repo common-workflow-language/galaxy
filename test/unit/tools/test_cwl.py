@@ -69,7 +69,7 @@ def test_serialize_deserialize():
     tool.job_proxy({"file1": "/moo"}, {})
     print(tool._tool.tool)
 
-    with open(path, "r") as f:
+    with open(path) as f:
         tool_object = yaml.safe_load(f)
     tool_object = json.loads(json.dumps(tool_object))
     tool = _to_cwl_tool_object(tool_object=tool_object, uuid=expected_uuid)
@@ -423,7 +423,7 @@ def test_load_proxy_bwa_mem():
 
 def test_representation_id():
     cat3 = _cwl_tool_path("v1.0/v1.0/cat3-tool.cwl")
-    with open(cat3, "r") as f:
+    with open(cat3) as f:
         representation = yaml.safe_load(f)
         representation["id"] = "my-cool-id"
 

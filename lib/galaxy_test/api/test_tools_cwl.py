@@ -19,7 +19,7 @@ class CwlToolsTestCase(ApiTestCase):
 
     def setUp(self):
         """Setup dataset populator."""
-        super(CwlToolsTestCase, self).setUp()
+        super().setUp()
         self.dataset_populator = DatasetPopulator(self.galaxy_interactor)
         worklfow_populator = WorkflowPopulator(self.galaxy_interactor)
         self.cwl_populator = CwlPopulator(self.dataset_populator, worklfow_populator)
@@ -441,7 +441,7 @@ class CwlToolsTestCase(ApiTestCase):
 
 
 def whale_text():
-    return open("test/functional/tools/cwl_tools/v1.0/v1.0/whale.txt", "r").read()
+    return open("test/functional/tools/cwl_tools/v1.0/v1.0/whale.txt").read()
 
 
 def _dataset_to_param(dataset):

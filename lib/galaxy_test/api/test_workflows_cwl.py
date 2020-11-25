@@ -15,7 +15,7 @@ class BaseCwlWorklfowTestCase(BaseWorkflowsApiTestCase):
     require_admin_user = True
 
     def setUp(self):
-        super(BaseCwlWorklfowTestCase, self).setUp()
+        super().setUp()
         self.history_id = self.dataset_populator.new_history()
         self.cwl_populator = CwlPopulator(
             self.dataset_populator, self.workflow_populator

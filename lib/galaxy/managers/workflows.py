@@ -379,7 +379,7 @@ class WorkflowContentsManager(UsesAnnotations):
 
         workflow_input_name = data['name']
         if source:
-            name = "{} (imported from {})".format(workflow_input_name, source)
+            name = f"{workflow_input_name} (imported from {source})"
         else:
             name = workflow_input_name
         workflow, missing_tool_tups = self._workflow_from_raw_description(

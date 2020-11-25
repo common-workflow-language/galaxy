@@ -454,7 +454,7 @@ GREEN_TESTS = {
 
 def load_conformance_tests(directory, path="conformance_tests.yaml"):
     conformance_tests_path = os.path.join(directory, path)
-    with open(conformance_tests_path, "r") as f:
+    with open(conformance_tests_path) as f:
         conformance_tests = yaml.safe_load(f)
 
     expanded_conformance_tests = []
@@ -556,7 +556,7 @@ def main():
         if suffix is None:
             test_file = "test_cwl_conformance_%s.py" % version_simple
         else:
-            test_file = "test_cwl_conformance_%s_%s.py" % (suffix, version_simple)
+            test_file = f"test_cwl_conformance_{suffix}_{version_simple}.py"
 
         with open(os.path.join(CWL_TESTS_DIRECTORY, test_file), "w") as f:
             f.write(contents)
